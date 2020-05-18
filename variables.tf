@@ -1,3 +1,15 @@
+/* GENERAL --------------------------------------*/
+
+variable "name" {
+  description = "Name to use for VPC elements"
+  type        = string
+}
+
+variable "stage" {
+  description = "Stage to use for VPC elements"
+  type        = string
+}
+
 /* PLUMBING -------------------------------------*/
 
 variable "zone" {
@@ -29,19 +41,7 @@ variable "open_tcp_ports" {
 }
 
 variable "open_udp_ports" {
-  description = "List of TCP port ranges to open."
+  description = "List of UDP port ranges to open."
   type        = list(string)
   default     = []
-}
-
-/* GENERAL --------------------------------------*/
-
-variable "name" {
-  description = "Name to use for VPC elements"
-  type        = string
-}
-
-variable "stage" {
-  description = "Stage to use for VPC elements"
-  type        = string
 }
