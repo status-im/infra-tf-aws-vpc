@@ -25,9 +25,9 @@ Here are the variables available in the module:
     - `name` - Name to use for VPC elements
     - `stage` - Stage to use for VPC elements
 * __Plumbing__
-    - `zone` - Availability Zone for VPCs and Subnets
-    - `vpc_cidr_block` - IPv4 address space from Classless Inter-Domain Routing for VPC.
-    - `subnet_cidr_block` - Subnet of the VPC CIDR block address space.
+    - `zone` - Availability Zone for VPCs and Subnets (Default: `eu-central-1a`)
+    - `vpc_cidr_block` - Classless Inter-Domain Routing address space. (Default: `172.20.0.0/16`)
+    - `subnet_cidr_block` - Subnet of the VPC CIDR block address space. (Default: `172.20.1.0/24`)
 * __Firewall__
     - `open_tcp_ports` - List of TCP port ranges to open.
     - `open_udp_ports` - List of UDP port ranges to open.
