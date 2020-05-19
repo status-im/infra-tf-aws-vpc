@@ -14,10 +14,13 @@ resource "aws_vpc" "main" {
 /* A VPN can't exist by itself, a subnet is necessary to add instances */
 resource "aws_subnet" "main" {
   vpc_id     = aws_vpc.main.id
-  cidr_block = var.subnet_cidr_block
+  cidr_block = var.subnet_cidr_blocks[count.index % length(var.subnet_cidr_blocks)]
+
+  /* Each AZ needs its own subnet */
+  count = length(var.zones)
 
   /* Needs to be the same as the instances zone */
-  availability_zone = var.zone
+  availability_zone = element(var.zones, count.index % length(var.zones))
 
   /* Necessary for instances available publicly */
   map_public_ip_on_launch = true
@@ -53,8 +56,9 @@ resource "aws_route_table" "main" {
 
 /* Add the route to Gateway to the Subnet */
 resource "aws_route_table_association" "main" {
-  subnet_id      = aws_subnet.main.id
+  subnet_id      = aws_subnet.main[count.index].id
   route_table_id = aws_route_table.main.id
+  count          = length(var.zones)
 }
 
 /* Open the necessary ports to the outside */

@@ -1,11 +1,11 @@
-output "vpc_id" {
-  value = aws_vpc.main.id
+output "vpc" {
+  value = aws_vpc.main
 }
 
-output "subnet_id" {
-  value = aws_subnet.main.id
+output "subnets" {
+  value = aws_subnet.main
 }
 
-output "secgroup_id" {
-  value = aws_security_group.main.id
+output "secgroup" {
+  value = aws_security_group.main
 }
