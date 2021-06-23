@@ -35,7 +35,7 @@ resource "aws_internet_gateway" "main" {
   vpc_id = aws_vpc.main.id
 
   tags = {
-    Name  = "ig-${var.name}-${var.stage}"
+    Name = "ig-${var.name}-${var.stage}"
   }
 }
 
@@ -95,7 +95,7 @@ resource "aws_security_group" "main" {
       to_port = tonumber(
         length(split("-", port.value)) > 1 ? split("-", port.value)[1] : port.value
       )
-      protocol  = "tcp"
+      protocol    = "tcp"
       cidr_blocks = ["0.0.0.0/0"]
     }
   }
@@ -112,7 +112,7 @@ resource "aws_security_group" "main" {
       to_port = tonumber(
         length(split("-", port.value)) > 1 ? split("-", port.value)[1] : port.value
       )
-      protocol  = "udp"
+      protocol    = "udp"
       cidr_blocks = ["0.0.0.0/0"]
     }
   }
