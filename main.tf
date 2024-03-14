@@ -5,6 +5,7 @@ resource "aws_vpc" "main" {
 
   enable_dns_support   = true
   enable_dns_hostnames = true
+  assign_generated_ipv6_cidr_block = true
 
   tags = {
     Name = "vpc-${var.name}-${var.stage}"
@@ -24,6 +25,9 @@ resource "aws_subnet" "main" {
 
   /* Necessary for instances available publicly */
   map_public_ip_on_launch = true
+  /* Enable IPv6 addresses for new instances. */
+  assign_ipv6_address_on_creation = true
+  ipv6_cidr_block = cidrsubnet(aws_vpc.main.ipv6_cidr_block, 8, 0) # /64 bit subnet
 
   tags = {
     Name = "sn-${var.name}-${var.stage}"
