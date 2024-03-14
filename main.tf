@@ -53,6 +53,11 @@ resource "aws_route_table" "main" {
     gateway_id = aws_internet_gateway.main.id
   }
 
+  route {
+    ipv6_cidr_block = "::/0"
+    gateway_id = aws_internet_gateway.main.id
+  }
+
   tags = {
     Name = "rt-${var.name}-${var.stage}"
   }
@@ -85,6 +90,7 @@ resource "aws_security_group" "main" {
     to_port     = 0
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
+    ipv6_cidr_blocks = ["::/0"]
   }
 
   /* TCP */
@@ -101,6 +107,7 @@ resource "aws_security_group" "main" {
       )
       protocol    = "tcp"
       cidr_blocks = ["0.0.0.0/0"]
+      ipv6_cidr_blocks = ["::/0"]
     }
   }
 
@@ -118,6 +125,7 @@ resource "aws_security_group" "main" {
       )
       protocol    = "udp"
       cidr_blocks = ["0.0.0.0/0"]
+      ipv6_cidr_blocks = ["::/0"]
     }
   }
 
